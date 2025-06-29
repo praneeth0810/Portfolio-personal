@@ -1,0 +1,1466 @@
+<html lang="en"><plasmo-csui id="jobright-helper-plugin"></plasmo-csui><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praneeth Chavva | Data Engineer</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'Monaco', 'Menlo', 'monospace'],
+                    },
+                    colors: {
+                        'primary': '#00d4aa',
+                        'secondary': '#00c3ff',
+                        'accent': '#6366f1',
+                        'dark': '#0f172a',
+                        'darker': '#020617',
+                        'light': '#e2e8f0'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 1s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out',
+                        'glow-pulse': 'glowPulse 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'typewriter': 'typewriter 4s steps(40) 1s 1 normal both'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(60px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        },
+                        glowPulse: {
+                            '0%': { boxShadow: '0 0 20px rgba(0, 212, 170, 0.5)' },
+                            '100%': { boxShadow: '0 0 40px rgba(0, 212, 170, 0.8), 0 0 60px rgba(0, 212, 170, 0.3)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        typewriter: {
+                            '0%': { width: '0' },
+                            '100%': { width: '100%' }
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-pattern': 'linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            position: relative;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(0, 212, 170, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .project-card {
+            background: linear-gradient(145deg, #1e293b, #334155);
+            border: 1px solid rgba(0, 212, 170, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 212, 170, 0.6);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(0, 212, 170, 0.2);
+        }
+        
+        .skill-bar-container {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 12px;
+            padding: 2px;
+            overflow: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 20px currentColor;
+        }
+        
+        .hero-grid {
+            background-image: 
+                linear-gradient(rgba(0, 212, 170, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 170, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #00d4aa;
+            white-space: nowrap;
+            animation: typewriter 4s steps(40) 1s 1 normal both, blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: #00d4aa; }
+            51%, 100% { border-color: transparent; }
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        
+        .timeline-line {
+            background: linear-gradient(to bottom, #00d4aa, #6366f1);
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Inter, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:JetBrains Mono, Monaco, Menlo, monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.bottom-0{bottom:0px}.bottom-1\/4{bottom:25%}.bottom-12{bottom:3rem}.bottom-20{bottom:5rem}.bottom-8{bottom:2rem}.left-0{left:0px}.left-1\/2{left:50%}.left-1\/4{left:25%}.left-10{left:2.5rem}.left-4{left:1rem}.left-6{left:1.5rem}.right-0{right:0px}.right-1\/4{right:25%}.right-10{right:2.5rem}.right-20{right:5rem}.top-0{top:0px}.top-1\/2{top:50%}.top-1\/4{top:25%}.top-20{top:5rem}.top-40{top:10rem}.z-10{z-index:10}.z-40{z-index:40}.mx-4{margin-left:1rem;margin-right:1rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-20{margin-bottom:5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-2{margin-left:0.5rem}.ml-3{margin-left:0.75rem}.mr-3{margin-right:0.75rem}.mr-4{margin-right:1rem}.mr-6{margin-right:1.5rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-20{height:5rem}.h-3{height:0.75rem}.h-32{height:8rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-64{height:16rem}.h-8{height:2rem}.h-96{height:24rem}.min-h-screen{min-height:100vh}.w-1{width:0.25rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-2{width:0.5rem}.w-20{width:5rem}.w-3{width:0.75rem}.w-32{width:8rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-64{width:16rem}.w-8{width:2rem}.w-96{width:24rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-7xl{max-width:80rem}.flex-1{flex:1 1 0%}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-1\/2{--tw-translate-y:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes fadeIn{0%{opacity:0;transform:translateY(40px)}100%{opacity:1;transform:translateY(0)}}.animate-fade-in{animation:fadeIn 0.8s ease-out}@keyframes float{0%, 100%{transform:translateY(0px)}50%{transform:translateY(-20px)}}.animate-float{animation:float 6s ease-in-out infinite}@keyframes glowPulse{0%{box-shadow:0 0 20px rgba(0, 212, 170, 0.5)}100%{box-shadow:0 0 40px rgba(0, 212, 170, 0.8), 0 0 60px rgba(0, 212, 170, 0.3)}}.animate-glow-pulse{animation:glowPulse 2s ease-in-out infinite alternate}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}@keyframes scaleIn{0%{opacity:0;transform:scale(0.9)}100%{opacity:1;transform:scale(1)}}.animate-scale-in{animation:scaleIn 0.6s ease-out}@keyframes slideUp{0%{opacity:0;transform:translateY(60px)}100%{opacity:1;transform:translateY(0)}}.animate-slide-up{animation:slideUp 1s ease-out}.cursor-pointer{cursor:pointer}.resize-none{resize:none}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-12{gap:3rem}.gap-16{gap:4rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-4{border-width:4px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-accent\/20{border-color:rgb(99 102 241 / 0.2)}.border-accent\/30{border-color:rgb(99 102 241 / 0.3)}.border-accent\/40{border-color:rgb(99 102 241 / 0.4)}.border-gray-600{--tw-border-opacity:1;border-color:rgb(75 85 99 / var(--tw-border-opacity, 1))}.border-primary{--tw-border-opacity:1;border-color:rgb(0 212 170 / var(--tw-border-opacity, 1))}.border-primary\/20{border-color:rgb(0 212 170 / 0.2)}.border-primary\/30{border-color:rgb(0 212 170 / 0.3)}.border-primary\/40{border-color:rgb(0 212 170 / 0.4)}.border-secondary\/20{border-color:rgb(0 195 255 / 0.2)}.border-secondary\/30{border-color:rgb(0 195 255 / 0.3)}.border-secondary\/40{border-color:rgb(0 195 255 / 0.4)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-white\/10{border-color:rgb(255 255 255 / 0.1)}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.border-white\/30{border-color:rgb(255 255 255 / 0.3)}.border-yellow-500\/30{border-color:rgb(234 179 8 / 0.3)}.border-yellow-500\/40{border-color:rgb(234 179 8 / 0.4)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-accent{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.bg-accent\/20{background-color:rgb(99 102 241 / 0.2)}.bg-accent\/5{background-color:rgb(99 102 241 / 0.05)}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-primary{--tw-bg-opacity:1;background-color:rgb(0 212 170 / var(--tw-bg-opacity, 1))}.bg-primary\/10{background-color:rgb(0 212 170 / 0.1)}.bg-primary\/20{background-color:rgb(0 212 170 / 0.2)}.bg-primary\/5{background-color:rgb(0 212 170 / 0.05)}.bg-secondary{--tw-bg-opacity:1;background-color:rgb(0 195 255 / var(--tw-bg-opacity, 1))}.bg-secondary\/10{background-color:rgb(0 195 255 / 0.1)}.bg-secondary\/20{background-color:rgb(0 195 255 / 0.2)}.bg-slate-800\/50{background-color:rgb(30 41 59 / 0.5)}.bg-white\/50{background-color:rgb(255 255 255 / 0.5)}.bg-yellow-500{--tw-bg-opacity:1;background-color:rgb(234 179 8 / var(--tw-bg-opacity, 1))}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-accent{--tw-gradient-from:#6366f1 var(--tw-gradient-from-position);--tw-gradient-to:rgb(99 102 241 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-accent\/10{--tw-gradient-from:rgb(99 102 241 / 0.1) var(--tw-gradient-from-position);--tw-gradient-to:rgb(99 102 241 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-accent\/20{--tw-gradient-from:rgb(99 102 241 / 0.2) var(--tw-gradient-from-position);--tw-gradient-to:rgb(99 102 241 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-accent\/30{--tw-gradient-from:rgb(99 102 241 / 0.3) var(--tw-gradient-from-position);--tw-gradient-to:rgb(99 102 241 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-primary{--tw-gradient-from:#00d4aa var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 212 170 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-primary\/10{--tw-gradient-from:rgb(0 212 170 / 0.1) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 212 170 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-primary\/20{--tw-gradient-from:rgb(0 212 170 / 0.2) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 212 170 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-primary\/30{--tw-gradient-from:rgb(0 212 170 / 0.3) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 212 170 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-secondary{--tw-gradient-from:#00c3ff var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 195 255 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-secondary\/20{--tw-gradient-from:rgb(0 195 255 / 0.2) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 195 255 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-secondary\/30{--tw-gradient-from:rgb(0 195 255 / 0.3) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 195 255 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-slate-800{--tw-gradient-from:#1e293b var(--tw-gradient-from-position);--tw-gradient-to:rgb(30 41 59 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-slate-900{--tw-gradient-from:#0f172a var(--tw-gradient-from-position);--tw-gradient-to:rgb(15 23 42 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-yellow-500\/20{--tw-gradient-from:rgb(234 179 8 / 0.2) var(--tw-gradient-from-position);--tw-gradient-to:rgb(234 179 8 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-secondary{--tw-gradient-to:rgb(0 195 255 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #00c3ff var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-slate-800{--tw-gradient-to:rgb(30 41 59 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #1e293b var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-slate-900{--tw-gradient-to:rgb(15 23 42 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #0f172a var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-accent{--tw-gradient-to:#6366f1 var(--tw-gradient-to-position)}.to-accent\/30{--tw-gradient-to:rgb(99 102 241 / 0.3) var(--tw-gradient-to-position)}.to-accent\/40{--tw-gradient-to:rgb(99 102 241 / 0.4) var(--tw-gradient-to-position)}.to-accent\/50{--tw-gradient-to:rgb(99 102 241 / 0.5) var(--tw-gradient-to-position)}.to-primary{--tw-gradient-to:#00d4aa var(--tw-gradient-to-position)}.to-primary\/10{--tw-gradient-to:rgb(0 212 170 / 0.1) var(--tw-gradient-to-position)}.to-primary\/30{--tw-gradient-to:rgb(0 212 170 / 0.3) var(--tw-gradient-to-position)}.to-primary\/40{--tw-gradient-to:rgb(0 212 170 / 0.4) var(--tw-gradient-to-position)}.to-primary\/50{--tw-gradient-to:rgb(0 212 170 / 0.5) var(--tw-gradient-to-position)}.to-secondary{--tw-gradient-to:#00c3ff var(--tw-gradient-to-position)}.to-secondary\/10{--tw-gradient-to:rgb(0 195 255 / 0.1) var(--tw-gradient-to-position)}.to-secondary\/30{--tw-gradient-to:rgb(0 195 255 / 0.3) var(--tw-gradient-to-position)}.to-secondary\/40{--tw-gradient-to:rgb(0 195 255 / 0.4) var(--tw-gradient-to-position)}.to-secondary\/50{--tw-gradient-to:rgb(0 195 255 / 0.5) var(--tw-gradient-to-position)}.to-slate-800{--tw-gradient-to:#1e293b var(--tw-gradient-to-position)}.to-slate-900{--tw-gradient-to:#0f172a var(--tw-gradient-to-position)}.to-yellow-500\/30{--tw-gradient-to:rgb(234 179 8 / 0.3) var(--tw-gradient-to-position)}.to-yellow-500\/40{--tw-gradient-to:rgb(234 179 8 / 0.4) var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.p-10{padding:2.5rem}.p-2{padding:0.5rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-10{padding-left:2.5rem;padding-right:2.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-32{padding-top:8rem;padding-bottom:8rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-12{padding-bottom:3rem}.pb-6{padding-bottom:1.5rem}.pl-20{padding-left:5rem}.pt-4{padding-top:1rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.font-sans{font-family:Inter, sans-serif}.font-mono{font-family:JetBrains Mono, Monaco, Menlo, monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-light{font-weight:300}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-wider{letter-spacing:0.05em}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-accent{--tw-text-opacity:1;color:rgb(99 102 241 / var(--tw-text-opacity, 1))}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-primary{--tw-text-opacity:1;color:rgb(0 212 170 / var(--tw-text-opacity, 1))}.text-secondary{--tw-text-opacity:1;color:rgb(0 195 255 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-yellow-500{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.placeholder-gray-400::placeholder{--tw-placeholder-opacity:1;color:rgb(156 163 175 / var(--tw-placeholder-opacity, 1))}.opacity-10{opacity:0.1}.opacity-30{opacity:0.3}.opacity-80{opacity:0.8}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.blur-xl{--tw-blur:blur(24px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.duration-500{transition-duration:500ms}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-accent\/50:hover{border-color:rgb(99 102 241 / 0.5)}.hover\:border-accent\/60:hover{border-color:rgb(99 102 241 / 0.6)}.hover\:border-primary\/40:hover{border-color:rgb(0 212 170 / 0.4)}.hover\:border-primary\/50:hover{border-color:rgb(0 212 170 / 0.5)}.hover\:border-primary\/60:hover{border-color:rgb(0 212 170 / 0.6)}.hover\:border-secondary\/40:hover{border-color:rgb(0 195 255 / 0.4)}.hover\:border-secondary\/50:hover{border-color:rgb(0 195 255 / 0.5)}.hover\:border-secondary\/60:hover{border-color:rgb(0 195 255 / 0.6)}.hover\:bg-accent\/30:hover{background-color:rgb(99 102 241 / 0.3)}.hover\:bg-primary:hover{--tw-bg-opacity:1;background-color:rgb(0 212 170 / var(--tw-bg-opacity, 1))}.hover\:bg-primary\/30:hover{background-color:rgb(0 212 170 / 0.3)}.hover\:bg-white\/5:hover{background-color:rgb(255 255 255 / 0.05)}.hover\:bg-gradient-to-r:hover{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.hover\:from-primary:hover{--tw-gradient-from:#00d4aa var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 212 170 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:to-secondary:hover{--tw-gradient-to:#00c3ff var(--tw-gradient-to-position)}.hover\:text-accent:hover{--tw-text-opacity:1;color:rgb(99 102 241 / var(--tw-text-opacity, 1))}.hover\:text-black:hover{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.hover\:text-primary:hover{--tw-text-opacity:1;color:rgb(0 212 170 / var(--tw-text-opacity, 1))}.hover\:text-secondary:hover{--tw-text-opacity:1;color:rgb(0 195 255 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-yellow-500:hover{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.hover\:shadow-2xl:hover{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.hover\:shadow-xl:hover{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.focus\:border-accent:focus{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.focus\:border-primary:focus{--tw-border-opacity:1;border-color:rgb(0 212 170 / var(--tw-border-opacity, 1))}.focus\:border-secondary:focus{--tw-border-opacity:1;border-color:rgb(0 195 255 / var(--tw-border-opacity, 1))}.focus\:border-yellow-500:focus{--tw-border-opacity:1;border-color:rgb(234 179 8 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-4:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-primary\/50:focus{--tw-ring-color:rgb(0 212 170 / 0.5)}.group:hover .group-hover\:translate-x-1{--tw-translate-x:0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:rotate-12{--tw-rotate:12deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group\/flow:hover .group-hover\/flow\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group\/flow:hover .group-hover\/flow\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group\/item:hover .group-hover\/item\:scale-125{--tw-scale-x:1.25;--tw-scale-y:1.25;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group\/link:hover .group-hover\/link\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:scale-125{--tw-scale-x:1.25;--tw-scale-y:1.25;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:border-accent\/40{border-color:rgb(99 102 241 / 0.4)}.group:hover .group-hover\:border-primary\/40{border-color:rgb(0 212 170 / 0.4)}.group:hover .group-hover\:border-secondary\/40{border-color:rgb(0 195 255 / 0.4)}.group:hover .group-hover\:text-accent{--tw-text-opacity:1;color:rgb(99 102 241 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-primary{--tw-text-opacity:1;color:rgb(0 212 170 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-secondary{--tw-text-opacity:1;color:rgb(0 195 255 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:flex-row{flex-direction:row}.sm\:px-8{padding-left:2rem;padding-right:2rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-6xl{font-size:3.75rem;line-height:1}.sm\:text-7xl{font-size:4.5rem;line-height:1}}@media (min-width: 768px){.md\:block{display:block}.md\:hidden{display:none}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.lg\:px-12{padding-left:3rem;padding-right:3rem}.lg\:px-8{padding-left:2rem;padding-right:2rem}.lg\:text-3xl{font-size:1.875rem;line-height:2.25rem}.lg\:text-4xl{font-size:2.25rem;line-height:2.5rem}.lg\:text-5xl{font-size:3rem;line-height:1}.lg\:text-7xl{font-size:4.5rem;line-height:1}.lg\:text-8xl{font-size:6rem;line-height:1}.lg\:text-lg{font-size:1.125rem;line-height:1.75rem}}</style><script id="simplify-jobs-page-script" src="chrome-extension://pbanhockgagggenencehbnadejlgchfc/js/pageScript.bundle.js"></script></head>
+<body class="bg-slate-900 text-white font-sans antialiased" id="body" data-new-gr-c-s-check-loaded="14.1242.0" data-gr-ext-installed=""> 
+    <!-- Enhanced Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 nav-blur border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        &lt;/&gt; Praneeth Chavva
+                    </span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex items-center space-x-8">
+                        <a href="#hero" class="nav-link px-4 py-2 rounded-lg text-sm font-medium hover:text-primary hover:bg-white/5 transition-all">Home</a>
+                        <a href="#about" class="nav-link px-4 py-2 rounded-lg text-sm font-medium hover:text-primary hover:bg-white/5 transition-all">About</a>
+                        <a href="#skills" class="nav-link px-4 py-2 rounded-lg text-sm font-medium hover:text-primary hover:bg-white/5 transition-all">Skills</a>
+                        <a href="#projects" class="nav-link px-4 py-2 rounded-lg text-sm font-medium hover:text-primary hover:bg-white/5 transition-all">Projects</a>
+                        <a href="#contact" class="nav-link bg-gradient-to-r from-primary to-secondary text-black px-6 py-2 rounded-lg font-semibold hover:scale-105 transition-all shadow-lg">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-6 pt-4 pb-6 space-y-3 glass-card mx-4 rounded-2xl mt-4">
+                <a href="#hero" class="nav-link block px-4 py-3 rounded-lg text-base font-medium hover:text-primary hover:bg-white/5 transition-all">Home</a>
+                <a href="#about" class="nav-link block px-4 py-3 rounded-lg text-base font-medium hover:text-primary hover:bg-white/5 transition-all">About</a>
+                <a href="#skills" class="nav-link block px-4 py-3 rounded-lg text-base font-medium hover:text-primary hover:bg-white/5 transition-all">Skills</a>
+                <a href="#projects" class="nav-link block px-4 py-3 rounded-lg text-base font-medium hover:text-primary hover:bg-white/5 transition-all">Projects</a>
+                <a href="#contact" class="nav-link block bg-gradient-to-r from-primary to-secondary text-black px-4 py-3 rounded-lg font-semibold text-center">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden hero-bg">
+        <div class="hero-grid absolute inset-0 opacity-30"></div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-32 h-32 bg-accent/20 rounded-full blur-xl animate-float" style="animation-delay: -2s"></div>
+        <div class="absolute top-40 right-20 w-16 h-16 bg-secondary/20 rounded-full blur-xl animate-float" style="animation-delay: -4s"></div>
+        
+        <div class="relative z-10 text-center px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
+            <!-- Main Heading -->
+            <div class="animate-fade-in">
+                <div class="mb-8">
+                    <span class="inline-block text-primary font-mono text-lg mb-4 tracking-wider">AWS CERTIFIED DATA ENGINEER</span>
+                </div>
+                
+                <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black mb-8 leading-tight">
+                    <span class="block text-white mb-4">Hey,</span>
+                    <span class="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent glow-text typewriter" id="typewriter" style="border-right: none;">
+                        I am Praneeth!
+                    </span>
+                </h1>
+                
+                <p class="text-xl sm:text-2xl lg:text-3xl text-gray-300 mb-16 max-w-5xl mx-auto leading-relaxed font-light animate-slide-up">
+                    From <span class="text-primary font-semibold">raw data</span> to 
+                    <span class="text-secondary font-semibold">real-time insights</span>
+                    <span class="text-accent font-semibold">powering decisions with</span> 
+                    scalable cloud architectures.
+                </p>
+                
+                <!-- Enhanced CTAs -->
+                <div class="flex flex-col sm:flex-row gap-6 justify-center animate-scale-in mb-20">
+                    <a href="#projects" class="group bg-gradient-to-r from-primary to-secondary text-black px-10 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 shadow-2xl animate-glow-pulse">
+                        <span class="flex items-center justify-center">
+                            Explore My Work
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="#contact" class="group glass-card border-2 border-primary text-primary px-10 py-5 rounded-2xl font-bold text-lg hover:bg-primary hover:text-black transition-all duration-300 hover:scale-105 shadow-2xl animate-fade-in">
+                        <span class="flex items-center justify-center">
+                            Let's Connect
+                            <svg class="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Stats Counter -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 animate-slide-up">
+                <div class="glass-card p-8 rounded-2xl text-center hover:scale-105 transition-all duration-300 animate-fade-in">
+                    <div class="text-4xl lg:text-5xl font-black text-primary counter mb-3 animate-fade-in" data-target="1">1</div>
+                    <div class="text-sm text-gray-400 font-medium uppercase tracking-wider">TB+ Processed monthly across batch and streaming pipelines</div>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center hover:scale-105 transition-all duration-300 animate-fade-in">
+                    <div class="text-4xl lg:text-5xl font-black text-secondary counter mb-3 animate-fade-in" data-target="10">10</div>
+                    <div class="text-sm text-gray-400 font-medium uppercase tracking-wider">plus Airflow DAGs deployed in production workflows</div>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center hover:scale-105 transition-all duration-300 animate-fade-in">
+                    <div class="text-4xl lg:text-5xl font-black text-accent counter mb-3 animate-fade-in" data-target="15000">15.0K+</div>
+                    <div class="text-sm text-gray-400 font-medium uppercase tracking-wider">Events/sec handled for real-time fraud detection</div>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center hover:scale-105 transition-all duration-300 animate-fade-in">
+                    <div class="text-4xl lg:text-5xl font-black text-primary counter mb-3 animate-fade-in" data-target="53">53</div>
+                    <div class="text-sm text-gray-400 font-medium uppercase tracking-wider">% Latency reduced through optimized ETL orchestration</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Animated Pipeline SVG -->
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-float">
+            <svg width="120" height="60" viewBox="0 0 120 60" class="text-primary">
+                <defs>
+                    <linearGradient id="pipelineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#00d4aa;stop-opacity:1"></stop>
+                        <stop offset="50%" style="stop-color:#00c3ff;stop-opacity:1"></stop>
+                        <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1"></stop>
+                    </linearGradient>
+                </defs>
+                <path d="M10,30 Q40,15 60,30 T110,30" stroke="url(#pipelineGradient)" stroke-width="3" fill="none" class="animate-pulse"></path>
+                <circle cx="10" cy="30" r="4" fill="#00d4aa" class="animate-glow-pulse"></circle>
+                <circle cx="60" cy="30" r="4" fill="#00c3ff" class="animate-glow-pulse" style="animation-delay: 0.5s"></circle>
+                <circle cx="110" cy="30" r="4" fill="#6366f1" class="animate-glow-pulse" style="animation-delay: 1s"></circle>
+            </svg>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6">
+                    <span class="text-primary font-mono">{</span> About Me <span class="text-primary font-mono">}</span>
+                </h2>
+                <p class="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                    Data engineer with <span class="text-primary font-semibold"> ~ 3 years of experience</span> building 
+                    <span class="text-secondary font-semibold">cloud-native data pipelines</span> on AWS and GCP, handling 
+                    <span class="text-accent font-semibold">1TB+ data/month</span> and 15K+ events/sec for real-time and batch use cases.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- JSON-style resume -->
+                <div class="group">
+                    <div class="glass-card p-10 rounded-3xl border border-primary/20 hover:border-primary/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-fade-in">
+                        <div class="text-primary mb-6 font-mono text-lg opacity-80">// praneethChavva.json</div>
+                        <pre class="text-gray-300 leading-relaxed text-sm sm:text-base lg:text-lg font-mono whitespace-pre-wrap break-words max-w-full overflow-auto">
+  <span class="text-accent">"name"</span>: <span class="text-primary">"Praneeth Chavva"</span>,
+  <span class="text-accent">"role"</span>: <span class="text-primary">"Data Engineer"</span>,
+  <span class="text-accent">"experience"</span>: <span class="text-primary">"3+ years"</span>,
+  <span class="text-accent">"education"</span>: <span class="text-primary">"Masters in Computer Science at The University of Utah"</span>,
+  <span class="text-accent">"specialization"</span>: [
+    <span class="text-primary">"ETL Pipeline Design"</span>,
+    <span class="text-primary">"Real-time Data Streaming"</span>,
+    <span class="text-primary">"Cloud Architecture"</span>,
+    <span class="text-primary">"Data Quality &amp; Testing"</span>
+  ],
+  <span class="text-accent">"cloudPlatforms"</span>: [
+    <span class="text-primary">"AWS"</span>, <span class="text-primary">"GCP"</span>
+  ],
+  <span class="text-accent">"certification"</span>: <span class="text-primary">"AWS Certified Data Engineer - Associate"</span>,
+  <span class="text-accent">"philosophy"</span>: <span class="text-primary">"Data quality isn't a checklist. It's a culture."</span>
+<span class="text-secondary">}</span>
+                        </pre>
+                    </div>
+                </div>
+
+                <!-- Career Journey Timeline -->
+                <div class="space-y-8">
+                    <h3 class="text-3xl lg:text-4xl font-bold text-white mb-12 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        Career Journey
+                    </h3>
+                    
+                    <div class="relative">
+                        <!-- Timeline line -->
+                        <div class="absolute left-6 top-0 bottom-0 w-1 timeline-line rounded-full"></div>
+                        
+                        <!-- Timeline items -->
+                        <div class="relative pl-20 pb-12 group">
+                            <div class="absolute left-4 w-5 h-5 bg-gradient-to-r from-primary to-secondary rounded-full border-4 border-slate-800 group-hover:scale-125 transition-all duration-300"></div>
+                            <div class="glass-card p-8 rounded-2xl border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-105 animate-fade-in">
+                                <h4 class="text-xl font-bold text-primary mb-3">Jan 2024 - Apr 2025</h4>
+                                <p class="text-white text-lg font-semibold mb-2">Research Assistant - Data Engineering</p>
+                                <p class="text-gray-300 text-lg">University of Utah, Salt Lake City</p>
+                                <div class="mt-4 text-gray-300">
+                                    <p>Here, I engineered research-oriented data pipelines that emphasized metadata lineage, schema drift detection, and reproducibility. I used Airflow, PostgreSQL, and dbt to build ETL systems that logged schema versions and tracked changes for ML fairness experiments. I also refactored Tableau dashboards by redesigning the data model into proper star/snowflake schemas, improving usability for research teams. On top of that, I mentored undergrad students on data modeling and guided capstone teams through building reliable pipelines.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-20 group">
+                            <div class="absolute left-4 w-5 h-5 bg-gradient-to-r from-secondary to-accent rounded-full border-4 border-slate-800 group-hover:scale-125 transition-all duration-300"></div>
+                            <div class="glass-card p-8 rounded-2xl border border-secondary/20 hover:border-secondary/40 transition-all duration-300 hover:scale-105 animate-fade-in">
+                                <h4 class="text-xl font-bold text-secondary mb-3">Jan 2021 - Jun 2023</h4>
+                                <p class="text-white text-lg font-semibold mb-2">Data Engineer</p>
+                                <p class="text-gray-300 text-lg">Cognizant Technology Solutions, Hyderabad</p>
+                                <div class="mt-4 text-gray-300">
+                                    <p>At Cognizant, I started off validating data pipelines and dashboards for telecom billing systems — basically making sure what we promised the client matched the actual data. Over time, I moved into a hybrid analyst-engineer role, working closely with marketing teams to pull campaign insights, optimize tariffs, and model KPIs. Eventually, I fully shifted into data engineering — building scalable ETL pipelines with Kafka, Spark, and Airflow for fraud detection and pricing analysis. We were handling 1.2TB+ monthly and streaming 15K+ events/sec.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-32 bg-slate-900 relative overflow-hidden">
+        <!-- Background Grid -->
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
+        <div class="absolute inset-0 hero-grid opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6">
+                    Technical <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Arsenal</span>
+                </h2>
+                <p class="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                    Cutting-edge tools and technologies I wield to build 
+                    <span class="text-primary font-semibold">robust data infrastructure</span>
+                </p>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <!-- Cloud Platforms -->
+                <div class="glass-card p-10 rounded-3xl border border-primary/20 hover:border-primary/50 transition-all duration-500 group hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">☁️</div>
+                    <h3 class="text-2xl font-bold text-white mb-6 group-hover:text-primary transition-colors">Cloud Platforms</h3>
+                    <div class="space-y-3">
+                        <div class="text-gray-300">
+                            <span class="text-primary font-semibold">AWS:</span> S3, Glue, Redshift, Lambda
+                        </div>
+                        <div class="text-gray-300">
+                            <span class="text-primary font-semibold">GCP:</span> BigQuery, Composer
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programming -->
+                <div class="glass-card p-10 rounded-3xl border border-secondary/20 hover:border-secondary/50 transition-all duration-500 group hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">💻</div>
+                    <h3 class="text-2xl font-bold text-white mb-6 group-hover:text-secondary transition-colors">Programming</h3>
+                    <div class="space-y-3">
+                        <div class="text-gray-300">
+                            <span class="text-secondary font-semibold">Languages:</span> Python, SQL, Bash
+                        </div>
+                        <div class="text-gray-300">
+                            <span class="text-secondary font-semibold">APIs:</span> Python APIs, CI/CD workflows
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Big Data -->
+                <div class="glass-card p-10 rounded-3xl border border-accent/20 hover:border-accent/50 transition-all duration-500 group hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">📊</div>
+                    <h3 class="text-2xl font-bold text-white mb-6 group-hover:text-accent transition-colors">Big Data</h3>
+                    <div class="space-y-3">
+                        <div class="text-gray-300">
+                            <span class="text-accent font-semibold">Processing:</span> Apache Spark, Hadoop
+                        </div>
+                        <div class="text-gray-300">
+                            <span class="text-accent font-semibold">Streaming:</span> Kafka
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Databases -->
+                <div class="glass-card p-10 rounded-3xl border border-primary/20 hover:border-primary/50 transition-all duration-500 group hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">🗄️</div>
+                    <h3 class="text-2xl font-bold text-white mb-6 group-hover:text-primary transition-colors">Databases</h3>
+                    <div class="space-y-3">
+                        <div class="text-gray-300">
+                            <span class="text-primary font-semibold">SQL:</span> PostgreSQL, MySQL
+                        </div>
+                        <div class="text-gray-300">
+                            <span class="text-primary font-semibold">Data Warehouses:</span> Redshift, BigQuery
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETL Tools -->
+                <div class="glass-card p-10 rounded-3xl border border-secondary/20 hover:border-secondary/50 transition-all duration-500 group hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">🔄</div>
+                    <h3 class="text-2xl font-bold text-white mb-6 group-hover:text-secondary transition-colors">ETL Tools</h3>
+                    <div class="space-y-3">
+                        <div class="text-gray-300">
+                            <span class="text-secondary font-semibold">Orchestration:</span> Airflow
+                        </div>
+                        <div class="text-gray-300">
+                            <span class="text-secondary font-semibold">Transformation:</span> dbt, AWS Glue
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Quality -->
+                <div class="glass-card p-10 rounded-3xl border border-accent/20 hover:border-accent/50 transition-all duration-500 group hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">⚙️</div>
+                    <h3 class="text-2xl font-bold text-white mb-6 group-hover:text-accent transition-colors">Data Quality &amp; Modeling</h3>
+                    <div class="space-y-3">
+                        <div class="text-gray-300">
+                            <span class="text-accent font-semibold">Testing:</span> Great Expectations, dbt tests
+                        </div>
+                        <div class="text-gray-300">
+                            <span class="text-accent font-semibold">Modeling:</span> Star/Snowflake schemas, SCD Type 2
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Tool Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card p-8 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-5xl mb-4 group-hover:scale-125 transition-transform duration-300">🚀</div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors mb-3">AWS Stack</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">S3, Glue, Redshift, Lambda, Athena</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl border border-secondary/20 hover:border-secondary/50 transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-5xl mb-4 group-hover:scale-125 transition-transform duration-300">🌐</div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-secondary transition-colors mb-3">GCP Suite</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">BigQuery, Composer, Cloud Storage</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl border border-accent/20 hover:border-accent/50 transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-5xl mb-4 group-hover:scale-125 transition-transform duration-300">⚡</div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-accent transition-colors mb-3">Streaming</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Kafka, AWS Kinesis</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-2xl animate-fade-in">
+                    <div class="text-5xl mb-4 group-hover:scale-125 transition-transform duration-300">📈</div>
+                    <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors mb-3">Visualization</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Tableau, Streamlit, Power BI</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 relative overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-r from-accent/10 to-primary/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6">
+                    Data <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Projects</span>
+                </h2>
+                <p class="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
+                    Real-world data engineering solutions that 
+                    <span class="text-primary font-semibold">transform business operations</span> and 
+                    <span class="text-secondary font-semibold">drive data-driven decisions</span>
+                </p>
+                
+                <!-- Project Filter -->
+                <div class="flex flex-wrap justify-center gap-4 mb-16">
+                    <button onclick="filterProjects('all')" class="filter-btn active bg-gradient-to-r from-primary to-secondary text-black px-8 py-4 rounded-2xl font-bold text-lg transition-all hover:scale-105 shadow-lg">
+                        All Projects
+                    </button>
+                    <button onclick="filterProjects('aws')" class="filter-btn glass-card text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-black border border-white/20 animate-fade-in">
+                        AWS
+                    </button>
+                    <button onclick="filterProjects('gcp')" class="filter-btn glass-card text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-black border border-white/20 animate-fade-in">
+                        GCP
+                    </button>
+                    <button onclick="filterProjects('streaming')" class="filter-btn glass-card text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-black border border-white/20 animate-fade-in">
+                        Streaming
+                    </button>
+                    <button onclick="filterProjects('etl')" class="filter-btn glass-card text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-black border border-white/20 animate-fade-in">
+                        ETL
+                    </button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid lg:grid-cols-2 gap-12">
+                
+                <!-- AppleHealth-iWatch Project -->
+                <div class="project-card group cursor-pointer animate-fade-in" data-tags="aws etl">
+                    <div class="glass-card p-10 rounded-3xl border border-primary/30 hover:border-primary/60 transition-all duration-500 hover:shadow-2xl relative overflow-hidden animate-fade-in">
+                        <!-- Project Header -->
+                        <div class="flex items-start justify-between mb-8">
+                            <div class="flex-1">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-3 h-3 bg-primary rounded-full mr-3 animate-pulse"></div>
+                                    <span class="text-primary font-mono text-sm uppercase tracking-wider">Featured Project</span>
+                                </div>
+                                <h3 class="text-3xl font-black text-white mb-4 group-hover:text-primary transition-colors">
+                                    AppleHealth-iWatch Data Pipeline
+                                </h3>
+                                <p class="text-primary font-mono text-base mb-6">University of Utah</p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <a href="https://applehealth-iwatch-pranchav.streamlit.app/" target="_blank" class="group/link w-12 h-12 bg-primary/20 hover:bg-primary/30 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                                    <svg class="w-6 h-6 text-primary group-hover/link:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                                        <path d="M5 5a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-1a1 1 0 10-2 0v1H5V7h1a1 1 0 000-2H5z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                            End-to-end data pipeline for processing Apple Watch health metrics using AWS cloud services. 
+                            Automated ETL processes transform XML health data into structured formats for interactive dashboards.
+                        </p>
+
+                        <!-- Tech Stack Tags -->
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="bg-gradient-to-r from-primary/20 to-primary/30 text-primary px-4 py-2 rounded-xl text-sm font-bold border border-primary/30">AWS Services</span>
+                            <span class="bg-gradient-to-r from-secondary/20 to-secondary/30 text-secondary px-4 py-2 rounded-xl text-sm font-bold border border-secondary/30">ETL Pipeline</span>
+                            <span class="bg-gradient-to-r from-accent/20 to-accent/30 text-accent px-4 py-2 rounded-xl text-sm font-bold border border-accent/30">Streamlit</span>
+                            <span class="bg-gradient-to-r from-yellow-500/20 to-yellow-500/30 text-yellow-500 px-4 py-2 rounded-xl text-sm font-bold border border-yellow-500/30">Data Visualization</span>
+                        </div>
+
+                        <!-- Project Highlights -->
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center text-gray-300 group/item hover:text-primary transition-colors">
+                                <div class="w-2 h-2 bg-primary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Automated XML to CSV and Parquet conversion</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-secondary transition-colors">
+                                <div class="w-2 h-2 bg-secondary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">AWS S3 data storage with Athena querying</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-accent transition-colors">
+                                <div class="w-2 h-2 bg-accent rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Real-time health metrics dashboard</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-yellow-500 transition-colors">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Modular execution with unified run.sh script</span>
+                            </div>
+                        </div>
+
+                        <!-- Architecture Diagram -->
+                        <div class="glass-card p-6 rounded-2xl border border-primary/20 group-hover:border-primary/40 transition-all animate-fade-in">
+                            <div class="flex items-center justify-between text-sm font-mono text-gray-400 mb-4">
+                                <span>Architecture Flow</span>
+                                <span class="text-primary font-bold">AWS Cloud</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="text-center group/flow">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/40 rounded-2xl border-2 border-primary/40 flex items-center justify-center mb-2 group-hover/flow:scale-110 transition-transform">
+                                        <span class="text-sm font-bold text-primary">XML</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400 font-mono">Source</span>
+                                </div>
+                                <div class="text-primary text-xl animate-pulse">→</div>
+                                <div class="text-center group/flow">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-secondary/20 to-secondary/40 rounded-2xl border-2 border-secondary/40 flex items-center justify-center mb-2 group-hover/flow:scale-110 transition-transform">
+                                        <span class="text-sm font-bold text-secondary">S3</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400 font-mono">Storage</span>
+                                </div>
+                                <div class="text-secondary text-xl animate-pulse">→</div>
+                                <div class="text-center group/flow">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/40 rounded-2xl border-2 border-accent/40 flex items-center justify-center mb-2 group-hover/flow:scale-110 transition-transform">
+                                        <span class="text-sm font-bold text-accent">App</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400 font-mono">Dashboard</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 📊 YouTube Data Analysis for Ad Campaigns -->
+                <div class="project-card group cursor-pointer animate-fade-in" data-tags="aws">
+                <div class="glass-card p-10 rounded-3xl border border-accent/30 hover:border-accent/60 transition-all duration-500 hover:shadow-2xl relative overflow-hidden animate-fade-in">
+                    
+                    <!-- Project Header -->
+                    <div class="flex items-start justify-between mb-8">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 bg-accent rounded-full mr-3 animate-pulse"></div>
+                        <span class="text-accent font-mono text-sm uppercase tracking-wider">Cloud-Based Analytics</span>
+                        </div>
+                        <h3 class="text-3xl font-black text-white mb-4 group-hover:text-accent transition-colors">
+                        YouTube Data Analysis for Ad Campaigns
+                        </h3>
+                        <p class="text-accent font-mono text-base mb-6">Personal Project</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="https://github.com/praneeth0810/praneeth0810-YouTube-Data-Analysis" target="_blank" class="group/link w-12 h-12 bg-accent/20 hover:bg-accent/30 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                        <svg class="w-6 h-6 text-accent group-hover/link:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                            <path d="M5 5a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-1a1 1 0 10-2 0v1H5V7h1a1 1 0 000-2H5z"></path>
+                        </svg>
+                        </a>
+                    </div>
+                    </div>
+
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                    Optimizes YouTube ad campaigns by analyzing video performance, categorization, and engagement patterns using an AWS-powered analytics stack with PySpark and QuickSight dashboards.
+                    </p>
+
+                    <!-- Tech Stack Tags -->
+                    <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="bg-gradient-to-r from-primary/20 to-primary/30 text-primary px-4 py-2 rounded-xl text-sm font-bold border border-primary/30">AWS S3</span>
+                    <span class="bg-gradient-to-r from-yellow-500/20 to-yellow-500/30 text-yellow-500 px-4 py-2 rounded-xl text-sm font-bold border border-yellow-500/30">Lambda</span>
+                    <span class="bg-gradient-to-r from-secondary/20 to-secondary/30 text-secondary px-4 py-2 rounded-xl text-sm font-bold border border-secondary/30">AWS Glue</span>
+                    <span class="bg-gradient-to-r from-accent/20 to-accent/30 text-accent px-4 py-2 rounded-xl text-sm font-bold border border-accent/30">Redshift</span>
+                    <span class="bg-gradient-to-r from-pink-500/20 to-pink-500/30 text-pink-500 px-4 py-2 rounded-xl text-sm font-bold border border-pink-500/30">QuickSight</span>
+                    </div>
+
+                    <!-- Project Highlights -->
+                    <div class="space-y-4 mb-8">
+                    <div class="flex items-center text-gray-300 group/item hover:text-primary transition-colors">
+                        <div class="w-2 h-2 bg-primary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                        <span class="text-base">ETL pipeline using Glue & PySpark</span>
+                    </div>
+                    <div class="flex items-center text-gray-300 group/item hover:text-yellow-500 transition-colors">
+                        <div class="w-2 h-2 bg-yellow-500 rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                        <span class="text-base">Lambda triggers on S3 upload</span>
+                    </div>
+                    <div class="flex items-center text-gray-300 group/item hover:text-accent transition-colors">
+                        <div class="w-2 h-2 bg-accent rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                        <span class="text-base">Categorizes video stats & comments</span>
+                    </div>
+                    <div class="flex items-center text-gray-300 group/item hover:text-pink-500 transition-colors">
+                        <div class="w-2 h-2 bg-pink-500 rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                        <span class="text-base">QuickSight dashboards for ad insights</span>
+                    </div>
+                    </div>
+
+                    <!-- Pipeline Visual -->
+                    <div class="glass-card p-6 rounded-2xl border border-accent/20 group-hover:border-accent/40 transition-all animate-fade-in">
+                    <div class="flex items-center justify-between text-sm font-mono text-gray-400 mb-4">
+                        <span>Ad Campaign ETL</span>
+                        <span class="text-accent font-bold">YouTube Analytics</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-3">
+                        <div class="w-16 h-8 bg-gradient-to-r from-primary/30 to-primary/50 rounded-lg flex items-center justify-center">
+                        <span class="text-xs font-bold text-primary">S3</span>
+                        </div>
+                        <div class="text-primary">→</div>
+                        <div class="w-16 h-8 bg-gradient-to-r from-yellow-500/30 to-yellow-500/50 rounded-lg flex items-center justify-center">
+                        <span class="text-xs font-bold text-yellow-500">Lambda</span>
+                        </div>
+                        <div class="text-yellow-500">→</div>
+                        <div class="w-16 h-8 bg-gradient-to-r from-secondary/30 to-secondary/50 rounded-lg flex items-center justify-center">
+                        <span class="text-xs font-bold text-secondary">Glue</span>
+                        </div>
+                        <div class="text-secondary">→</div>
+                        <div class="w-16 h-8 bg-gradient-to-r from-accent/30 to-accent/50 rounded-lg flex items-center justify-center">
+                        <span class="text-xs font-bold text-accent">Redshift</span>
+                        </div>
+                        <div class="text-accent">→</div>
+                        <div class="w-20 h-8 bg-gradient-to-r from-pink-500/30 to-pink-500/50 rounded-lg flex items-center justify-center">
+                        <span class="text-xs font-bold text-pink-500">QuickSight</span>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+
+
+                <!-- HealthAnalytics Platform -->
+                <div class="project-card group cursor-pointer animate-fade-in" data-tags="aws etl">
+                    <div class="glass-card p-10 rounded-3xl border border-accent/30 hover:border-accent/60 transition-all duration-500 hover:shadow-2xl relative overflow-hidden animate-fade-in">
+                        <!-- Project Header -->
+                        <div class="flex items-start justify-between mb-8">
+                            <div class="flex-1">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-3 h-3 bg-accent rounded-full mr-3 animate-pulse"></div>
+                                    <span class="text-accent font-mono text-sm uppercase tracking-wider">Healthcare AI</span>
+                                </div>
+                                <h3 class="text-3xl font-black text-white mb-4 group-hover:text-accent transition-colors">
+                                    HealthAnalytics Platform
+                                </h3>
+                                <p class="text-accent font-mono text-base mb-6">University of Utah</p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <a href="https://github.com/praneeth0810/HealthAnalytics" target="_blank" class="group/link w-12 h-12 bg-accent/20 hover:bg-accent/30 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                                    <svg class="w-6 h-6 text-accent group-hover/link:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                                        <path d="M5 5a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-1a1 1 0 10-2 0v1H5V7h1a1 1 0 000-2H5z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                            Data-driven healthcare analytics platform analyzing drug usage patterns and patient volume.
+                            Processes 500K+ health records via Spark on Hadoop with HIPAA-compliant storage on AWS S3.
+                        </p>
+
+                        <!-- Tech Stack Tags -->
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="bg-gradient-to-r from-accent/20 to-accent/30 text-accent px-4 py-2 rounded-xl text-sm font-bold border border-accent/30">Hadoop</span>
+                            <span class="bg-gradient-to-r from-primary/20 to-primary/30 text-primary px-4 py-2 rounded-xl text-sm font-bold border border-primary/30">Apache Spark</span>
+                            <span class="bg-gradient-to-r from-secondary/20 to-secondary/30 text-secondary px-4 py-2 rounded-xl text-sm font-bold border border-secondary/30">AWS S3</span>
+                            <span class="bg-gradient-to-r from-yellow-500/20 to-yellow-500/30 text-yellow-500 px-4 py-2 rounded-xl text-sm font-bold border border-yellow-500/30">Hive</span>
+                        </div>
+
+                        <!-- Project Highlights -->
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center text-gray-300 group/item hover:text-accent transition-colors">
+                                <div class="w-2 h-2 bg-accent rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Scalable Hadoop data management</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-secondary transition-colors">
+                                <div class="w-2 h-2 bg-secondary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Predictive models for patient volume</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-primary transition-colors">
+                                <div class="w-2 h-2 bg-primary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">HIPAA-compliant storage constraints</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-yellow-500 transition-colors">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Batch scheduling with Hive</span>
+                            </div>
+                        </div>
+
+                        <!-- ML Pipeline Visual -->
+                        <div class="glass-card p-6 rounded-2xl border border-accent/20 group-hover:border-accent/40 transition-all animate-fade-in">
+                            <div class="flex items-center justify-between text-sm font-mono text-gray-400 mb-4">
+                                <span>Analytics Pipeline</span>
+                                <span class="text-accent font-bold">Healthcare Intelligence</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-3">
+                                <div class="w-16 h-8 bg-gradient-to-r from-accent/30 to-accent/50 rounded-lg flex items-center justify-center">
+                                    <span class="text-xs font-bold text-accent">Data</span>
+                                </div>
+                                <div class="text-accent">→</div>
+                                <div class="w-16 h-8 bg-gradient-to-r from-secondary/30 to-secondary/50 rounded-lg flex items-center justify-center">
+                                    <span class="text-xs font-bold text-secondary">Process</span>
+                                </div>
+                                <div class="text-secondary">→</div>
+                                <div class="w-16 h-8 bg-gradient-to-r from-primary/30 to-primary/50 rounded-lg flex items-center justify-center">
+                                    <span class="text-xs font-bold text-primary">Insights</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 📈 Stock Market Real-Time Data Analysis -->
+                <div class="project-card group cursor-pointer animate-fade-in" data-tags="streaming aws">
+                <div class="glass-card p-10 rounded-3xl border border-accent/30 hover:border-accent/60 transition-all duration-500 hover:shadow-2xl relative overflow-hidden animate-fade-in">
+                    <!-- Project Header -->
+                    <div class="flex items-start justify-between mb-8">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 bg-accent rounded-full mr-3 animate-pulse"></div>
+                        <span class="text-accent font-mono text-sm uppercase tracking-wider">Real-Time Streaming</span>
+                        </div>
+                        <h3 class="text-3xl font-black text-white mb-4 group-hover:text-accent transition-colors">
+                        Stock Market Real-Time Data Analysis
+                        </h3>
+                        <p class="text-accent font-mono text-base mb-6">University of Utah</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="https://github.com/praneeth0810/praneeth0810-Stockmarket-kafkaaws" target="_blank" class="group/link w-12 h-12 bg-accent/20 hover:bg-accent/30 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                        <svg class="w-6 h-6 text-accent group-hover/link:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                            <path d="M5 5a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-1a1 1 0 10-2 0v1H5V7h1a1 1 0 000-2H5z"></path>
+                        </svg>
+                        </a>
+                    </div>
+                    </div>
+
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                    Real-time stock market pipeline streaming data using Kafka, storing and querying with AWS (S3, Glue, Athena). Simulates live data ingestion with robust, scalable design.
+                    </p>
+
+                    <!-- Tech Stack Tags -->
+                    <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="bg-gradient-to-r from-yellow-500/20 to-yellow-500/30 text-yellow-500 px-4 py-2 rounded-xl text-sm font-bold border border-yellow-500/30">Apache Kafka</span>
+                    <span class="bg-gradient-to-r from-primary/20 to-primary/30 text-primary px-4 py-2 rounded-xl text-sm font-bold border border-primary/30">AWS S3</span>
+                    <span class="bg-gradient-to-r from-secondary/20 to-secondary/30 text-secondary px-4 py-2 rounded-xl text-sm font-bold border border-secondary/30">AWS Glue</span>
+                    <span class="bg-gradient-to-r from-accent/20 to-accent/30 text-accent px-4 py-2 rounded-xl text-sm font-bold border border-accent/30">Athena</span>
+                    </div>
+
+                    <!-- Project Highlights -->
+                    <div class="space-y-4 mb-8">
+                    <div class="flex items-center text-gray-300 group/item hover:text-yellow-500 transition-colors">
+                        <div class="w-2 h-2 bg-yellow-500 rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                        <span class="text-base">Kafka Producer simulates stock stream</span>
+                    </div>
+                    <div class="flex items-center text-gray-300 group/item hover:text-secondary transition-colors">
+                        <div class="w-2 h-2 bg-secondary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                        <span class="text-base">Consumer stores events in S3 buckets</span>
+                    </div>
+                    <div class="flex items-center text-gray-300 group/item hover:text-primary transition-colors">
+                        <div class="w-2 h-2 bg-primary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                        <span class="text-base">AWS Glue catalogs metadata for querying</span>
+                    </div>
+                    <div class="flex items-center text-gray-300 group/item hover:text-accent transition-colors">
+                        <div class="w-2 h-2 bg-accent rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                        <span class="text-base">Athena fetches real-time insights</span>
+                    </div>
+                    </div>
+
+                    <!-- Pipeline Visual -->
+                    <div class="glass-card p-6 rounded-2xl border border-accent/20 group-hover:border-accent/40 transition-all animate-fade-in">
+                    <div class="flex items-center justify-between text-sm font-mono text-gray-400 mb-4">
+                        <span>Streaming Pipeline</span>
+                        <span class="text-accent font-bold">Financial Analytics</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-3">
+                        <div class="w-16 h-8 bg-gradient-to-r from-yellow-500/30 to-yellow-500/50 rounded-lg flex items-center justify-center">
+                        <span class="text-xs font-bold text-yellow-500">Kafka</span>
+                        </div>
+                        <div class="text-yellow-500">→</div>
+                        <div class="w-16 h-8 bg-gradient-to-r from-primary/30 to-primary/50 rounded-lg flex items-center justify-center">
+                        <span class="text-xs font-bold text-primary">S3</span>
+                        </div>
+                        <div class="text-primary">→</div>
+                        <div class="w-16 h-8 bg-gradient-to-r from-secondary/30 to-secondary/50 rounded-lg flex items-center justify-center">
+                        <span class="text-xs font-bold text-secondary">Glue</span>
+                        </div>
+                        <div class="text-secondary">→</div>
+                        <div class="w-16 h-8 bg-gradient-to-r from-accent/30 to-accent/50 rounded-lg flex items-center justify-center">
+                        <span class="text-xs font-bold text-accent">Athena</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- E-Commerce Revenue Pipeline -->
+                <div class="project-card group cursor-pointer animate-fade-in" data-tags="gcp etl">
+                    <div class="glass-card p-10 rounded-3xl border border-secondary/30 hover:border-secondary/60 transition-all duration-500 hover:shadow-2xl relative overflow-hidden animate-fade-in">
+                        <!-- Project Header -->
+                        <div class="flex items-start justify-between mb-8">
+                            <div class="flex-1">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-3 h-3 bg-secondary rounded-full mr-3 animate-pulse"></div>
+                                    <span class="text-secondary font-mono text-sm uppercase tracking-wider">Enterprise Solution</span>
+                                </div>
+                                <h3 class="text-3xl font-black text-white mb-4 group-hover:text-secondary transition-colors">
+                                    E-Commerce Revenue Pipeline
+                                </h3>
+                                <p class="text-secondary font-mono text-base mb-6">University of Utah</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                            Robust GCP-based pipeline calculating daily product revenue for e-commerce platforms. 
+                            Leverages Apache Spark and BigQuery for scalable financial analytics and decision-making.
+                        </p>
+
+                        <!-- Tech Stack Tags -->
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="bg-gradient-to-r from-secondary/20 to-secondary/30 text-secondary px-4 py-2 rounded-xl text-sm font-bold border border-secondary/30">GCP</span>
+                            <span class="bg-gradient-to-r from-accent/20 to-accent/30 text-accent px-4 py-2 rounded-xl text-sm font-bold border border-accent/30">Apache Spark</span>
+                            <span class="bg-gradient-to-r from-primary/20 to-primary/30 text-primary px-4 py-2 rounded-xl text-sm font-bold border border-primary/30">BigQuery</span>
+                            <span class="bg-gradient-to-r from-yellow-500/20 to-yellow-500/30 text-yellow-500 px-4 py-2 rounded-xl text-sm font-bold border border-yellow-500/30">Airflow</span>
+                        </div>
+
+                        <!-- Project Highlights -->
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center text-gray-300 group/item hover:text-secondary transition-colors">
+                                <div class="w-2 h-2 bg-secondary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">PySpark &amp; Spark-SQL for big data processing</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-accent transition-colors">
+                                <div class="w-2 h-2 bg-accent rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Apache Airflow workflow orchestration</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-primary transition-colors">
+                                <div class="w-2 h-2 bg-primary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Automated CSV to Parquet conversion</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-yellow-500 transition-colors">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">BigQuery analytics and reporting</span>
+                            </div>
+                        </div>
+
+                        <!-- Pipeline Flow -->
+                        <div class="glass-card p-6 rounded-2xl border border-secondary/20 group-hover:border-secondary/40 transition-all animate-fade-in">
+                            <div class="flex items-center justify-between text-sm font-mono text-gray-400 mb-4">
+                                <span>Data Flow</span>
+                                <span class="text-secondary font-bold">GCP Platform</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-3 text-center">
+                                <div class="group/flow">
+                                    <div class="w-full h-12 bg-gradient-to-r from-primary/20 to-primary/40 rounded-xl border border-primary/40 flex items-center justify-center mb-2 group-hover/flow:scale-105 transition-transform">
+                                        <span class="text-sm font-bold text-primary">Ingest</span>
+                                    </div>
+                                </div>
+                                <div class="group/flow">
+                                    <div class="w-full h-12 bg-gradient-to-r from-secondary/20 to-secondary/40 rounded-xl border border-secondary/40 flex items-center justify-center mb-2 group-hover/flow:scale-105 transition-transform">
+                                        <span class="text-sm font-bold text-secondary">Process</span>
+                                    </div>
+                                </div>
+                                <div class="group/flow">
+                                    <div class="w-full h-12 bg-gradient-to-r from-accent/20 to-accent/40 rounded-xl border border-accent/40 flex items-center justify-center mb-2 group-hover/flow:scale-105 transition-transform">
+                                        <span class="text-sm font-bold text-accent">ETL</span>
+                                    </div>
+                                </div>
+                                <div class="group/flow">
+                                    <div class="w-full h-12 bg-gradient-to-r from-yellow-500/20 to-yellow-500/40 rounded-xl border border-yellow-500/40 flex items-center justify-center mb-2 group-hover/flow:scale-105 transition-transform">
+                                        <span class="text-sm font-bold text-yellow-500">Analytics</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Uber Data Analytics -->
+                <div class="project-card group cursor-pointer animate-fade-in" data-tags="gcp etl">
+                    <div class="glass-card p-10 rounded-3xl border border-primary/30 hover:border-primary/60 transition-all duration-500 hover:shadow-2xl relative overflow-hidden animate-fade-in">
+                        <!-- Project Header -->
+                        <div class="flex items-start justify-between mb-8">
+                            <div class="flex-1">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-3 h-3 bg-primary rounded-full mr-3 animate-pulse"></div>
+                                    <span class="text-primary font-mono text-sm uppercase tracking-wider">Business Intelligence</span>
+                                </div>
+                                <h3 class="text-3xl font-black text-white mb-4 group-hover:text-primary transition-colors">
+                                    Uber Data Analytics Platform
+                                </h3>
+                                <p class="text-primary font-mono text-base mb-6">Personal Project</p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <a href="https://github.com/praneeth0810/UberDataAnalytics" target="_blank" class="group/link w-12 h-12 bg-primary/20 hover:bg-primary/30 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                                    <svg class="w-6 h-6 text-primary group-hover/link:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                                        <path d="M5 5a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-1a1 1 0 10-2 0v1H5V7h1a1 1 0 000-2H5z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                            Comprehensive ride-sharing analytics platform using GCP and BigQuery to process 1M+ trip records. 
+                            Modeled with STAR schema, designed Looker dashboards for revenue trends and peak hour insights.
+                        </p>
+
+                        <!-- Tech Stack Tags -->
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="bg-gradient-to-r from-primary/20 to-primary/30 text-primary px-4 py-2 rounded-xl text-sm font-bold border border-primary/30">BigQuery</span>
+                            <span class="bg-gradient-to-r from-accent/20 to-accent/30 text-accent px-4 py-2 rounded-xl text-sm font-bold border border-accent/30">Looker Studio</span>
+                            <span class="bg-gradient-to-r from-secondary/20 to-secondary/30 text-secondary px-4 py-2 rounded-xl text-sm font-bold border border-secondary/30">STAR Schema</span>
+                            <span class="bg-gradient-to-r from-yellow-500/20 to-yellow-500/30 text-yellow-500 px-4 py-2 rounded-xl text-sm font-bold border border-yellow-500/30">Composer</span>
+                        </div>
+
+                        <!-- Project Highlights -->
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center text-gray-300 group/item hover:text-primary transition-colors">
+                                <div class="w-2 h-2 bg-primary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">GCP pipeline for 1M+ trip records</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-accent transition-colors">
+                                <div class="w-2 h-2 bg-accent rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Interactive Looker Studio dashboards</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-secondary transition-colors">
+                                <div class="w-2 h-2 bg-secondary rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Revenue trend tracking &amp; peak hour insights</span>
+                            </div>
+                            <div class="flex items-center text-gray-300 group/item hover:text-yellow-500 transition-colors">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-4 group-hover/item:scale-125 transition-transform"></div>
+                                <span class="text-base">Tipping behavior analysis for marketing</span>
+                            </div>
+                        </div>
+
+
+                        <!-- BI Dashboard Preview -->
+                        <div class="glass-card p-6 rounded-2xl border border-primary/20 group-hover:border-primary/40 transition-all animate-fade-in">
+                            <div class="flex items-center justify-between text-sm font-mono text-gray-400 mb-4">
+                                <span>Analytics Dashboard</span>
+                                <span class="text-primary font-bold">Looker Studio</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="h-8 bg-gradient-to-r from-primary/20 to-primary/40 rounded border border-primary/30 flex items-center justify-center">
+                                    <span class="text-xs font-bold text-primary">📍 Pickup</span>
+                                </div>
+                                <div class="h-8 bg-gradient-to-r from-accent/20 to-accent/40 rounded border border-accent/30 flex items-center justify-center">
+                                    <span class="text-xs font-bold text-accent">💰 Revenue</span>
+                                </div>
+                                <div class="h-8 bg-gradient-to-r from-secondary/20 to-secondary/40 rounded border border-secondary/30 flex items-center justify-center">
+                                    <span class="text-xs font-bold text-secondary">⏰ Peak</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-secondary/10 rounded-full blur-3xl animate-float" style="animation-delay: -2s"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style="animation-delay: -4s"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6">
+                    Let's <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Connect</span>
+                </h2>
+                <p class="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                    Ready to discuss data engineering opportunities or collaborate on 
+                    <span class="text-primary font-semibold">innovative data solutions</span>?
+                </p>
+            </div>
+
+            <!-- Education Section -->
+            <div class="space-y-8">
+                <div class="glass-card p-10 rounded-3xl border border-primary/30 hover:border-primary/50 transition-all duration-500 animate-fade-in">
+                    <h3 class="text-3xl font-bold text-white mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        Education
+                    </h3>
+
+                    <div class="space-y-6 text-left">
+                        <!-- University of Utah -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-white">University of Utah</h4>
+                            <p class="text-gray-400 text-sm">Master of Science in Computer Science</p>
+                            <p class="text-gray-500 text-sm italic">2023 – 2025 · GPA: 3.7/4.0</p>
+                        </div>
+
+                        <!-- Vellore Institute of Technology -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-white">Vellore Institute of Technology, India</h4>
+                            <p class="text-gray-400 text-sm">B.Tech in Electronics and Communication Engineering (IoT Specialization)</p>
+                            <p class="text-gray-500 text-sm italic">2017 – 2021</p>
+                        </div>
+                    </div>
+
+                    <!-- Resume Download Button -->
+                    <div class="text-center mt-10">
+                        <a href="/files/Praneeth_Chavva_Resume.pdf" download class="inline-block bg-gradient-to-r from-primary via-secondary to-accent text-black px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-primary/50">
+                            Download Resume
+                            <svg class="w-5 h-5 ml-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div class="glass-card p-10 rounded-3xl border border-secondary/30 hover:border-secondary/50 transition-all duration-500 animate-fade-in">
+                        <h3 class="text-3xl font-bold text-white mb-8 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+                            Get in Touch
+                        </h3>
+                        
+                        <div class="space-y-8">
+                            <div class="flex items-center group cursor-pointer hover:scale-105 transition-all duration-300">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/40 rounded-2xl border border-primary/40 flex items-center justify-center mr-6 group-hover:scale-110 transition-transform">
+                                    <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">Email</h4>
+                                    <p class="text-gray-400 text-lg">praneethchavva06@gmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center group cursor-pointer hover:scale-105 transition-all duration-300">
+                                <div class="w-16 h-16 bg-gradient-to-br from-secondary/20 to-secondary/40 rounded-2xl border border-secondary/40 flex items-center justify-center mr-6 group-hover:scale-110 transition-transform">
+                                    <svg class="w-8 h-8 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-white group-hover:text-secondary transition-colors">Location</h4>
+                                    <p class="text-gray-400 text-lg">Salt Lake City, UT</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center group cursor-pointer hover:scale-105 transition-all duration-300">
+                                <div class="w-16 h-16 bg-gradient-to-br from-accent/20 to-accent/40 rounded-2xl border border-accent/40 flex items-center justify-center mr-6 group-hover:scale-110 transition-transform">
+                                    <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-white group-hover:text-accent transition-colors">Phone</h4>
+                                    <p class="text-gray-400 text-lg">(801)-462-4151</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connect on Social -->
+                    <div class="glass-card p-10 rounded-3xl border border-accent/30 hover:border-accent/50 transition-all duration-500 animate-fade-in">
+                        <h3 class="text-3xl font-bold text-white mb-8 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+                            Connect on Social
+                        </h3>
+                        
+                        <div class="grid grid-cols-2 gap-6">
+                            <a href="https://www.linkedin.com/in/praneethchavva/" target="_blank" class="group flex flex-col items-center p-6 glass-card rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fade-in">
+                                <div class="w-12 h-12 bg-gradient-to-br from-primary/30 to-primary/50 rounded-xl border border-primary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-bold text-white group-hover:text-primary transition-colors">LinkedIn</span>
+                            </a>
+
+                            <a href="https://github.com/praneeth0810" target="_blank" class="group flex flex-col items-center p-6 glass-card rounded-2xl border border-secondary/20 hover:border-secondary/50 transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fade-in">
+                                <div class="w-12 h-12 bg-gradient-to-br from-secondary/30 to-secondary/50 rounded-xl border border-secondary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-bold text-white group-hover:text-secondary transition-colors">GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/50 backdrop-blur-md border-t border-white/10 py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center space-y-8">
+                <div class="flex justify-center items-center space-x-4 mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center">
+                        <span class="text-black font-black text-xl">&lt;/&gt;</span>
+                    </div>
+                    <span class="text-3xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        Praneeth Chavva
+                    </span>
+                </div>
+                
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+                    Building the data infrastructure of tomorrow with 
+                    <span class="text-primary font-semibold">cloud-native solutions</span> and 
+                    <span class="text-secondary font-semibold">real-time analytics</span>
+                </p>
+                
+                <div class="flex justify-center space-x-8 py-8">
+                    <a href="#hero" class="text-gray-400 hover:text-primary transition-colors text-lg font-medium">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-secondary transition-colors text-lg font-medium">About</a>
+                    <a href="#skills" class="text-gray-400 hover:text-accent transition-colors text-lg font-medium">Skills</a>
+                    <a href="#projects" class="text-gray-400 hover:text-primary transition-colors text-lg font-medium">Projects</a>
+                    <a href="#contact" class="text-gray-400 hover:text-secondary transition-colors text-lg font-medium">Contact</a>
+                </div>
+                
+                <div class="border-t border-white/10 pt-8">
+                    <p class="text-gray-500 text-sm font-mono">
+                        © 2025 Praneeth Chavva. AWS Certified Data Engineer.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const button = document.getElementById('mobile-menu-button');
+            
+            mobileMenu.classList.toggle('hidden');
+            
+            // Animate button
+            if (mobileMenu.classList.contains('hidden')) {
+                button.innerHTML = `
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>`;
+            } else {
+                button.innerHTML = `
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>`;
+            }
+        }
+
+        // Smooth Scrolling
+        function smoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offsetTop = target.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            toggleMobileMenu();
+                        }
+                    }
+                });
+            });
+        }
+
+        // Intersection Observer for Animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                        
+                        // Animate counters
+                        if (entry.target.classList.contains('counter')) {
+                            animateCounter(entry.target);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe counters
+            document.querySelectorAll('.counter').forEach(counter => {
+                observer.observe(counter);
+            });
+
+            // Observe other animated elements
+            document.querySelectorAll('.project-card, .glass-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Counter Animation
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.target);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (target > 1000000) {
+                    element.textContent = (current / 1000000).toFixed(1) + 'M+';
+                } else if (target > 1000) {
+                    element.textContent = (current / 1000).toFixed(1) + 'K+';
+                } else if (target < 100 && target % 1 !== 0) {
+                    element.textContent = current.toFixed(1);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // Project Filtering
+        function filterProjects(category) {
+            const projects = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button states
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'bg-gradient-to-r', 'from-primary', 'to-secondary', 'text-black');
+                btn.classList.add('glass-card', 'text-white', 'border', 'border-white/20');
+            });
+            
+            event.target.classList.remove('glass-card', 'text-white', 'border', 'border-white/20');
+            event.target.classList.add('active', 'bg-gradient-to-r', 'from-primary', 'to-secondary', 'text-black');
+            
+            // Filter projects with animation
+            projects.forEach(project => {
+                const tags = project.dataset.tags;
+                
+                if (category === 'all' || tags.includes(category)) {
+                    project.style.display = 'block';
+                    setTimeout(() => {
+                        project.style.opacity = '1';
+                        project.style.transform = 'scale(1)';
+                    }, 100);
+                } else {
+                    project.style.opacity = '0';
+                    project.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        project.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Form Submission
+        function initContactForm() {
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const button = form.querySelector('button[type="submit"]');
+                const originalText = button.innerHTML;
+                
+                // Loading state
+                button.innerHTML = `
+                    <span class="flex items-center justify-center">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                    </span>`;
+                button.disabled = true;
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    button.innerHTML = `
+                        <span class="flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Message Sent!
+                        </span>`;
+                    
+                    // Reset after 3 seconds
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                        form.reset();
+                    }, 3000);
+                }, 2000);
+            });
+        }
+
+        // Typewriter Effect
+        function initTypewriter() {
+            const element = document.getElementById('typewriter');
+            if (element) {
+                const text = element.textContent;
+                element.textContent = '';
+                element.style.borderRight = '3px solid #00d4aa';
+                
+                let i = 0;
+                const typeInterval = setInterval(() => {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typeInterval);
+                        // Keep blinking cursor for a while
+                        setTimeout(() => {
+                            element.style.borderRight = 'none';
+                        }, 3000);
+                    }
+                }, 100);
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all features
+            smoothScroll();
+            initScrollAnimations();
+            initContactForm();
+            initTypewriter();
+            
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', toggleMobileMenu);
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const button = document.getElementById('mobile-menu-button');
+                
+                if (!mobileMenu.contains(e.target) && !button.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (window.innerWidth >= 768 && !mobileMenu.classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+        });
+    </script>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
